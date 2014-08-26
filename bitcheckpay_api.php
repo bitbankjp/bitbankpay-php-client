@@ -106,7 +106,7 @@ class BitcheckPay{
 					curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
 					curl_setopt($curl, CURLOPT_TIMEOUT, 10);
 					curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-					curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+					curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
 					curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 					curl_setopt($curl, CURLOPT_FORBID_REUSE, true);
 					curl_setopt($curl, CURLOPT_FRESH_CONNECT, true);
