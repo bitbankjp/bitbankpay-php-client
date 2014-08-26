@@ -49,5 +49,5 @@ NG case
 ## Setting
 There is no settings.
 
-## Logfile(default)
+## Log
 To php's error_log() 
