@@ -4,6 +4,7 @@ bitcheckpay-php-client
 ## Execute Example
 
 Write below (as test.php). And run, php test.php
+
 	<?php
 	include('bitcheckpay_api.php');
 	$API = new jp\bitcheck\pay\BitcheckPay('Your API Key');
