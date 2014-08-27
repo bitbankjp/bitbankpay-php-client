@@ -22,7 +22,7 @@ Write below (as test.php). And run, php test.php
 OK case
 
 	$ php test.php
-	Done
+	Success. Acceess to [url]
 
 
 NG case
