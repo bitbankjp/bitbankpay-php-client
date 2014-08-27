@@ -10,7 +10,7 @@ Write below (as test.php). And run, php test.php
 	$API = new jp\bitcheck\pay\BitcheckPay('Your API Key');
 	$Data = $API->createInvoice(0.005, 'BTC', 'ItemName');
 	if($Data['result'] == 'OK'){
-		echo "Done\n";
+		echo "Success. Acceess to ".$Data['url']." \n";
 	}else{
 		echo "Fail\n";
 		print_r($Data);
