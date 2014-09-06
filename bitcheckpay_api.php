@@ -126,8 +126,6 @@ class BitcheckPay{
 					} else {
 						if (function_exists('json_decode'))
 							$response = json_decode($responseString, true);
-						else
-							$response = bpJSONdecode($responseString);
 
 						if (!$response) {
 							$response = array('error' => 'invalid json');
