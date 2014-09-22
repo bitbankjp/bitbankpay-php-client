@@ -32,7 +32,11 @@ class BitcheckPay{
 
 	public function acceptBitcoin($id){
 		try{
-			return $this->curl(self::BASE_URL.'/accept_bitcoin/'.$id, $this->apiKey);
+			if(!is_array($id)){
+				$id = array($id);
+			}
+			$params = json_encode(array('uuid'=>$id));
+			return $this->curl(self::BASE_URL.'/accept_bitcoin', $this->apiKey, $params);
 		} catch (Exception $e) {
 			if ($this->useLogging)
 				$this->log('Error in $this->acceptBitcoin(): ' . $e->getMessage());
@@ -42,7 +46,11 @@ class BitcheckPay{
 
 	public function acceptJpyYen($id){
 		try{
-			return $this->curl(self::BASE_URL.'/accept_jpyyen/'.$id, $this->apiKey);
+			if(!is_array($id)){
+				$id = array($id);
+			}
+			$params = json_encode(array('uuid'=>$id));
+			return $this->curl(self::BASE_URL.'/accept_jpyyen', $this->apiKey, $params);
 		} catch (Exception $e) {
 			if ($this->useLogging)
 				$this->log('Error in $this->acceptBitcoin(): ' . $e->getMessage());
