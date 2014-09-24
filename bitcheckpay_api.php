@@ -2,8 +2,8 @@
 namespace jp\bitcheck\pay;
 
 class BitcheckPay{
-	
-	const BASE_URL = 'https://settlement.bitcheck.jp/api/v1/invoice';
+
+	const BASE_URL = 'https://api.bitbankpay.jp/api/v1';
 	
 	private $apiKey;
 	
@@ -22,10 +22,38 @@ class BitcheckPay{
 
 	public function createInvoice($price,$currency,$itemName) {
 		try {
-			return $this->curl(self::BASE_URL, $this->apiKey, $this->getParams($price,$currency,$itemName));
+			return $this->curl(self::BASE_URL.'/invoice', $this->apiKey, $this->getParams($price,$currency,$itemName));
 		} catch (Exception $e) {
 			if ($this->useLogging)
 				$this->log('Error in $this->createInvoice(): ' . $e->getMessage());
+			return array('error' => $e->getMessage());
+		}
+	}
+
+	public function acceptBitcoin($id){
+		try{
+			if(!is_array($id)){
+				$id = array($id);
+			}
+			$params = json_encode(array('uuid'=>$id));
+			return $this->curl(self::BASE_URL.'/accept_bitcoin', $this->apiKey, $params);
+		} catch (Exception $e) {
+			if ($this->useLogging)
+				$this->log('Error in $this->acceptBitcoin(): ' . $e->getMessage());
+			return array('error' => $e->getMessage());
+		}
+	}
+
+	public function acceptJpyYen($id){
+		try{
+			if(!is_array($id)){
+				$id = array($id);
+			}
+			$params = json_encode(array('uuid'=>$id));
+			return $this->curl(self::BASE_URL.'/accept_jpyyen', $this->apiKey, $params);
+		} catch (Exception $e) {
+			if ($this->useLogging)
+				$this->log('Error in $this->acceptBitcoin(): ' . $e->getMessage());
 			return array('error' => $e->getMessage());
 		}
 	}

@@ -6,11 +6,25 @@ bitcheckpay-php-client
 Write below (as test.php). And run, php test.php
 
 	<?php
+	$use_exchange = true; // or false
+
 	include('bitcheckpay_api.php');
 	$API = new jp\bitcheck\pay\BitcheckPay('Your API Key');
 	$Data = $API->createInvoice(0.005, 'BTC', 'ItemName');
 	if($Data['result'] == 'OK'){
-		echo "Success. Acceess to ".$Data['url']." \n";
+		echo "Success. Access to ".$Data['url']." \n";
+		if($use_exchange){
+			// if exchange jpy
+			$DataEx = $API->acceptJpyYen($Data['id']);
+		}else{
+			// if send my wallet
+			$DataEx = $API->acceptBitcoin($Data['id']);
+		}
+		if($DataEx['result'] == 'OK'){
+			echo "Success to book exchange. \n";
+		}else{
+			echo "Fail to book exchange. \n";
+		}
 	}else{
 		echo "Fail\n";
 		print_r($Data);
