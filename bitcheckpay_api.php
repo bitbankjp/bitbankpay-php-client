@@ -3,7 +3,7 @@ namespace jp\bitcheck\pay;
 
 class BitcheckPay{
 
-	const BASE_URL = 'https://settlement.bitcheck.jp/api/v1';
+	const BASE_URL = 'https://api.bitbankpay.jp/api/v1';
 	
 	private $apiKey;
 	
