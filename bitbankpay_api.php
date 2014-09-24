@@ -1,7 +1,7 @@
 <?php
-namespace jp\bitcheck\pay;
+namespace jp\bitbank\pay;
 
-class BitcheckPay{
+class BitbankPay{
 
 	const BASE_URL = 'https://api.bitbankpay.jp/api/v1';
 	
