@@ -1,67 +1,28 @@
-bitcheckpay-php-client
+bitbankpay-php-client
 ======================
 
-## Execute Example
+Examples
+--------
 
-Write below (as test.php). And run, php test.php
+### createInvoice
 
-	<?php
-	$use_exchange = true; // or false
+```php
+include('./bitbankpay_api.php');
+use jp\bitbank\pay\BitbankPay;
 
-	include('bitcheckpay_api.php');
-	$API = new jp\bitcheck\pay\BitcheckPay('Your API Key');
-	$Data = $API->createInvoice(0.005, 'BTC', 'ItemName');
-	if($Data['result'] == 'OK'){
-		echo "Success. Access to ".$Data['url']." \n";
-		if($use_exchange){
-			// if exchange jpy
-			$DataEx = $API->acceptJpyYen($Data['id']);
-		}else{
-			// if send my wallet
-			$DataEx = $API->acceptBitcoin($Data['id']);
-		}
-		if($DataEx['result'] == 'OK'){
-			echo "Success to book exchange. \n";
-		}else{
-			echo "Fail to book exchange. \n";
-		}
-	}else{
-		echo "Fail\n";
-		print_r($Data);
-	}
-	?>
+$bitcheckPay = new BitbankPay('API Key');
+$bitcheckPay->setOrderID('order_id');
+$bitcheckPay->setUserMail('mail');
+$json = $bitcheckPay->createInvoice(amount,'currency','item_name');
+```
 
-## Doctest
+### acceptJpyYen
 
-OK case
+```php
+$bitcheckPay->acceptJpyYen($json['id']);
+```
+### acceptBitcoin
 
-	$ php test.php
-	Success. Acceess to [url]
-
-
-NG case
-
-	$ php test.php
-	Fail
-	Array
-	(
-	    [id] => bcp53fc3fe238f377.73395178
-	    [url] =>
-	    [status] => invalid
-	    [price] => 0.005
-	    [currency] => BTC
-	    [btcPrice] => 0.005
-	    [invoiceTime] =>
-	    [expirationTime] =>
-	    [currentTime] => 1409040354
-	    [result] => NG
-	    [error] => APIキーが正しくありません。
-
-	)
-
-
-## Setting
-There is no settings.
-
-## Log
-To php's error_log() 
+```php
+$bitcheckPay->acceptBitcoin($json['id']);
+```
